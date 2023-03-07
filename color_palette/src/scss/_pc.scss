@@ -1,0 +1,36 @@
+#palette-area {
+    display: grid;
+    grid-template-rows: 50vh 5fr 10fr;
+}
+
+#palette {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 5vw;
+}
+
+.card {
+    background-color: white;
+    display: grid;
+    grid-template-rows: 5fr 1fr;
+    height: 30vh;
+    width: 10vw;
+    gap: 5px;
+    border: 10px solid white;
+    border-radius: 10px;
+}
+
+.card:hover {
+    cursor: pointer;
+}
+
+.color {
+    text-align: center;
+}
+
+.color-code {
+    text-align: center;
+    margin: auto;
+    font-weight: bold;
+    color: black;
+}
