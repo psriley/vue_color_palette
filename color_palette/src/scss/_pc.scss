@@ -1,12 +1,12 @@
 #palette-area {
     display: grid;
-    grid-template-rows: 50vh 5fr 10fr;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5vw;
 }
 
-#palette {
+#button-area {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    gap: 5vw;
+    gap: 2vh;
 }
 
 .card {

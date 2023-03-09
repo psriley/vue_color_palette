@@ -5,21 +5,96 @@ import PaletteCard from './components/PaletteCard.vue'
 </script>
 
 <template>
-  <!-- <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+  <div id="title">Random Color Palette Generator</div>
+  <!-- <div v-if="copiedColor !== null">Color {{ this.copiedColor }} copied to your clipboard</div> -->
+  <div id="palette-area">
+    <div v-for="color in palette">
+      <PaletteCard :colorHex="color.hex"/>
     </div>
-  </header> -->
-
-  <PaletteCard />
+  </div>
+  <div id="button-area">
+    <button @click="generateRandomColors">Generate palette</button>
+    <p>Or just press the "Spacebar" to generate new palettes.</p>
+  </div>
+  <div id="instructions">Click to copy individual color &#x2022; Press "C" to copy palette</div>
 </template>
+
+<script>
+export default {
+  name: 'Palette',
+  components: {
+    PaletteCard
+  },
+  data() {
+      return {
+          copiedColor: null,
+          palette: [
+              {
+                  id: 0,
+                  hex: 'FFFFF',
+              },
+              {
+                  id: 1,
+                  hex: 'FFFFF',
+              },
+              {
+                  id: 2,
+                  hex: 'FFFFF',
+              },
+              {
+                  id: 3,
+                  hex: 'FFFFF',
+              },
+              {
+                  id: 4,
+                  hex: 'FFFFF',
+              },
+          ]
+      };
+  }, 
+  mounted () {
+      this.generateRandomColors();
+      document.addEventListener("keydown", this.onKeyDown);
+  },
+  methods: {
+      onKeyDown(event) {
+          if (event.key === " ") {
+              this.generateRandomColors();
+          }
+      },
+      copyColor(color) {
+          // var url = this.$refs.colorHex;
+          // url.innerHTML = window.location.href;
+          // console.log(url);
+          this.copiedColor = color;
+          console.log(this.copiedColor);
+          navigator.clipboard.writeText(this.copiedColor)
+      },
+      generateRandomColors() {
+          const characters = 'ABCDEF0123456789';
+          let hex = '#';
+          let colors = [];
+          for (let i = 0; i < 5; i++) {
+              for (let j = 0; j < 6; j++) {
+                  hex += characters.charAt(Math.floor(Math.random() * characters.length));
+              }
+              console.log(`Color ${i}: ${hex}`);
+              // this.palette.push({id: i, hex: hex})
+              this.palette[i].id = i;
+              this.palette[i].hex = hex;
+              colors[i] = hex;
+              hex = '#';
+          }
+          console.log(this.palette);
+          return colors;
+      }
+  },
+}
+</script>
+
+<style>
+@import "./scss/_pc.scss";
+</style>
 
 <!-- <style scoped>
 header {

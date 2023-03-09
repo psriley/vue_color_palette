@@ -1,5 +1,42 @@
 @import './base.css';
 
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10vh auto auto auto;
+  /* background-color: #7e6cca; */
+  background-color: #7e6cca;
+  border: 5px solid #58427e;
+  /* border: 5px solid #7e6cca; */
+  color: white;
+  text-decoration: none;
+  height: 10vh;
+  width: 25vw;
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+button:hover {
+  background-color: #58427e;
+}
+
+#title {
+  text-align: center;
+  margin-bottom: 5vh;
+  font-size: xx-large;
+}
+
+#instructions {
+  background-color: white;
+  width: fit-content;
+  border-radius: 25px;
+  font-size: x-large;
+  padding: 2rem;
+  margin: 10vh auto auto auto;
+}
+
 #app {
   max-width: 1280px;
   margin: 0 auto;
@@ -25,11 +62,5 @@ a,
   body {
     display: flex;
     place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
   }
 }
