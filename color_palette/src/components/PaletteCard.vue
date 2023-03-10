@@ -1,22 +1,17 @@
+<script setup>
+import { copyHTMLToClipboard } from '../main';
+</script>
+
 <template>
     <div class="card" @click="copyColor(this.colorHex)">
         <div class="color" :style="{backgroundColor: `${this.colorHex}`}" :key="this.colorHex">
         </div>
-        <div class="color-code" ref="colorHex">{{ this.colorHex }}</div>
+        <div class="color-code" ref="hex">{{ this.colorHex }}</div>
     </div>
-    <!-- <div class="card" v-for="color in palette" :key="color.id" @click="copyColor(color.hex)">
-        
-    </div> -->
-    <!-- <div v-if="copiedColor !== null">Color {{ this.copiedColor }} copied to your clipboard</div>
-    <div id="palette-area">
-        <div id="palette">
-        </div>
-        <button @click="generateRandomColors">Generate palette</button>
-    </div> -->
 </template>
 
 <style>
-    @import "../scss/_pc.scss";
+@import '../scss/_pc.scss';
 </style>
 
 <script>
@@ -26,80 +21,18 @@ export default {
     ],
     methods: {
         copyColor(color) {
-            // var url = this.$refs.colorHex;
-            // url.innerHTML = window.location.href;
-            // console.log(url);
-            this.copiedColor = color;
-            console.log(this.copiedColor);
-            navigator.clipboard.writeText(this.copiedColor)
+            // I tried this method two different ways:
+            // 1. using a passed in 'color' through the event.
+            // 2. using a template ref (what I have uncommented now)
+            // I also decided not to use copyHTMLToClipboard from fns because
+            // it copies the html as a blob you can't paste in the browser
+
+            // console.log(this.$refs.hex.innerHTML);
+            // copyHTMLToClipboard(this.$refs.hex.innerHTML);
+            // this.copiedColor = color;
+            // console.log(this.copiedColor);
+            navigator.clipboard.writeText(this.$refs.hex.innerHTML);
         },
     },
 }
-// export default {
-//     name: 'PaletteCard',
-//     data() {
-//         return {
-//             copiedColor: null,
-//             palette: [
-//                 {
-//                     id: 0,
-//                     hex: 'FFFFF',
-//                 },
-//                 {
-//                     id: 1,
-//                     hex: 'FFFFF',
-//                 },
-//                 {
-//                     id: 2,
-//                     hex: 'FFFFF',
-//                 },
-//                 {
-//                     id: 3,
-//                     hex: 'FFFFF',
-//                 },
-//                 {
-//                     id: 4,
-//                     hex: 'FFFFF',
-//                 },
-//             ]
-//         };
-//     }, 
-//     mounted () {
-//         this.generateRandomColors();
-//         document.addEventListener("keydown", this.onKeyDown);
-//     },
-//     methods: {
-//         onKeyDown(event) {
-//             if (event.key === " ") {
-//                 this.generateRandomColors();
-//             }
-//         },
-//         copyColor(color) {
-//             // var url = this.$refs.colorHex;
-//             // url.innerHTML = window.location.href;
-//             // console.log(url);
-//             this.copiedColor = color;
-//             console.log(this.copiedColor);
-//             navigator.clipboard.writeText(this.copiedColor)
-//         },
-//         generateRandomColors() {
-//             const characters = 'ABCDEF0123456789';
-//             let hex = '#';
-//             let colors = [];
-//             for (let i = 0; i < 5; i++) {
-//                 for (let j = 0; j < 6; j++) {
-//                     hex += characters.charAt(Math.floor(Math.random() * characters.length));
-//                 }
-//                 console.log(`Color ${i}: ${hex}`);
-//                 // this.palette.push({id: i, hex: hex})
-//                 this.palette[i].id = i;
-//                 this.palette[i].hex = hex;
-//                 colors[i] = hex;
-//                 hex = '#';
-//             }
-//             console.log(this.palette);
-//             return colors;
-//         }
-//     },
-// }
 </script>
